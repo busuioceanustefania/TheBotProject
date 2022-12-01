@@ -16,8 +16,8 @@ int main() {
 	//cout << endl << teatru.getTotalNoSeatsZone();
 	//cout << teatru;
 	//cin >> teatru;
-	teatru = teatru - 2;
-	cout << teatru;
+	//teatru = teatru - 2;
+	//cout << teatru;
 	/*if (teatru == copy) {
 		cout << endl << "It's the same location";
 	}*/
