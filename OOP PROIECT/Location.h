@@ -14,7 +14,7 @@ private:
 
 public:
 
-	const static int MINIMUM_NO_SEATS_PER_ROW = 10;
+	const static int MINIMUM_NO_SEATS_PER_ROW = 1;
 	const static int MAXIMUM_NO_SEATS_PER_ROW = 50;
 
 	//setters and getters
@@ -47,11 +47,11 @@ public:
 			throw "The SeatsPerRow pointer is not ok";
 		}
 
-		for (int i = 0; i < noRows; i++) {
+		/*for (int i = 0; i < noRows; i++) {
 			if (noNewSeatsPerRow[i] < Location::MINIMUM_NO_SEATS_PER_ROW || noNewSeatsPerRow[i]>Location::MAXIMUM_NO_SEATS_PER_ROW) {
 				throw "Number of seats is not ok";
 			}
-		}
+		}*/
 
 		if (this->noSeatsPerRow != nullptr)
 			delete[] this->noSeatsPerRow;
@@ -122,7 +122,10 @@ public:
 
 		if (location.noSeatsPerRow != nullptr) {
 			this->noSeatsPerRow = new int[location.noRows];
-			memcpy(this->noSeatsPerRow, location.noSeatsPerRow, location.noRows);
+			/*memcpy(this->noSeatsPerRow, location.noSeatsPerRow, location.noRows);*/
+			for (int i = 0; i <location.noRows; i++) {
+				this->noSeatsPerRow[i] = location.noSeatsPerRow[i];
+			}
 		}
 		else {
 			this->noSeatsPerRow = nullptr;
@@ -137,6 +140,7 @@ public:
 		}
 		return totalNoSeats;
 	}
+
 	friend void operator<<(ostream& out, Location location);
 	friend void operator>>(istream& in, Location& location);
 
@@ -148,14 +152,33 @@ private:
 		}
 		return copy;
 	}
+
+
 };
+
+Location operator+(Location location, int value) {
+	//increasing the number of rows
+
+	Location result = location;
+	result.setNoRows(location.getNoRows() + value);
+	return result;
+}
+
+Location operator-(Location location, int value) {
+
+	//decreasing the number of rows
+	Location result = location;
+	result.setNoRows(location.getNoRows() - value);
+	return result;
+}
 
 void operator<<(ostream& out, Location location) {
 	out << endl << "Number of Rows " << location.noRows;
+	out << endl << "Number of seats per row ";
 	for (int i = 0; i < location.noRows; i++) {
 		out << location.noSeatsPerRow[i] << " ";
 	}
-	out << endl << "Number of Rides " << location.noZones;
+	out << endl << "Number of Zones " << location.noZones;
 	out << endl << "Number of seat " << location.noSeat;
 }
 
