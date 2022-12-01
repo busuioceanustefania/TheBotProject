@@ -1,4 +1,5 @@
 #define _CRT_SECURE_NO_WARNINGS
+#include "Event.h"
 #include "Location.h"
 #include <iostream>
 #include <string>
@@ -11,7 +12,7 @@ int main() {
 	Location teatru(noSeatsPerRow, 3, 2, 12);
 	//teatru.print();
 
-	Location copy = teatru;
+	//Location copy = teatru;
 	//copy.print();
 	//cout << endl << teatru.getTotalNoSeatsZone();
 	//cout << teatru;
@@ -21,4 +22,21 @@ int main() {
 	/*if (teatru == copy) {
 		cout << endl << "It's the same location";
 	}*/
+
+
+	Event petrecere("Neversea", "Constanta", "22 pm", "22 oct 2022", 3);
+	//cout << petrecere;
+	//cin >> petrecere;
+	Event party = petrecere;
+	cout << party;
+
+	/*if (party == petrecere) {
+		cout << endl << "The same event";
+	}*/
+
+	if (party != petrecere) {
+		cout << endl << "Different duration";
+	}
+	else
+		cout << endl << "The same duration";
 }

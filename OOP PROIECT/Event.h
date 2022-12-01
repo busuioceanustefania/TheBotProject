@@ -13,6 +13,7 @@ private:
 
 	static int NO_OF_EVENTS;
 public:
+
 	const static int MIN_ADDRESS_SIZE = 3;
 	 
 	//default ctor
@@ -146,7 +147,37 @@ public:
 	static int getCount() {
 		return NO_OF_EVENTS;
 	}
+
+	char* upperCase(const char* text) {
+		char* newText = new char[strlen(text) + 1];
+		strcpy(newText, text);
+		for (int i = 0; i < strlen(text); i++) {
+			newText[i] = toupper(text[i]);
+		}
+		return newText;
+	}
+
+	char* removeSpaces(const char* text) {
+
+		int i, nr = 0;
+		for (i = 0; i < strlen(text); i++)
+		{
+			if (text[i] == ' ')
+				nr++;
+		}
+		char* newtext = new char[strlen(text) - nr + 1];
+		int ok = 0;
+		for (i = 0; i < strlen(text); i++)
+		{
+			if (text[i] != ' ')
+				newtext[ok++] = text[i];
+		}
+		newtext[strlen(text) - nr] = '\0';
+		return newtext;
+	}
 };
+
+int Event::NO_OF_EVENTS = 0;
 
 void operator<<(ostream& out, Event event) {
 	out << endl << "Event name: " << event.eventName;
