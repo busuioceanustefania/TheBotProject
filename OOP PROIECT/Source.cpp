@@ -1,6 +1,7 @@
 #define _CRT_SECURE_NO_WARNINGS
 #include "Event.h"
 #include "Location.h"
+#include "Ticket.h"
 #include <iostream>
 #include <string>
 using namespace std;
