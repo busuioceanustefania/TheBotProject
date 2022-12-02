@@ -28,16 +28,24 @@ int main() {
 	Event petrecere("Neversea", "Constanta", "22 pm", "22 oct 2022", 3);
 	//cout << petrecere;
 	//cin >> petrecere;
-	Event party = petrecere;
-	cout << party;
+	/*Event party = petrecere;
+	cout << party;*/
 
 	/*if (party == petrecere) {
 		cout << endl << "The same event";
 	}*/
 
-	if (party != petrecere) {
+	/*if (party != petrecere) {
 		cout << endl << "Different duration";
 	}
 	else
-		cout << endl << "The same duration";
+		cout << endl << "The same duration";*/
+
+	Ticket bilet(1, "Popescu Ilie", 100, 18, VIP);
+	cout << bilet;
+	cout << endl << "-----------------------";
+	cin >> bilet;
+	cout << endl << "-----------------------";
+	bilet *= 2;
+	cout << bilet;
 }
