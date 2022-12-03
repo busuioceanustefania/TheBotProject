@@ -1,6 +1,7 @@
 #pragma once
 #include <iostream>
 #include <string>
+#include <regex>
 using namespace std;
 
 class Event {
@@ -175,7 +176,28 @@ public:
 		newtext[strlen(text) - nr] = '\0';
 		return newtext;
 	}
+
+	
 };
+bool valid_date(string date) {
+	regex pattern("^(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])/[0-9]{4}$");
+	smatch m;
+	regex_search(date, m, pattern);
+	if (m[0].matched == true)
+		return true;
+	else
+		return false;
+}
+
+bool valid_time(string time) {
+	regex pattern("([01]?[0-9]|2[0-3]):[0-5][0-9]");
+	smatch m;
+	regex_search(time, m, pattern);
+	if (m[0].matched == true)
+		return true;
+	else
+		return false;
+}
 
 int Event::NO_OF_EVENTS = 0;
 
@@ -190,12 +212,20 @@ void operator<<(ostream& out, Event event) {
 }
 
 void operator>>(istream& in, Event& event) {
-	cout << endl << "Event date: ";
+	cout << endl << "Event date: (please enter the date following this concept: MM/DD/YYYY) ";
 	in >> event.date;
-	cout << endl << "Event time: ";
+	if (valid_date(event.date) == false)
+		cout << endl << "Invalid date";
+
+	cout << endl << "Event time: (please enter the time following this concept: HH:MM) ";
 	in >> event.time;
-	cout << endl << "Event duration: ";
+	if (valid_time(event.time) == false)
+		cout << endl << "Invalid time";
+
+	cout << endl << "Event duration: (please enter a value bigger than 0) ";
 	in >> event.duration;
+	if (event.duration <= 0)
+		cout << endl << "Invalid duration";
 
 	cout << endl << "Event address: ";
 	char buffer[100];

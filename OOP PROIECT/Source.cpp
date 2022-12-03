@@ -11,8 +11,8 @@ using namespace std;
 int main() {
 
 
-	int noSeatsPerRow[] = { 11, 23, 12 };
-	Location teatru(noSeatsPerRow, 3, 2, 12);
+	/*int noSeatsPerRow[] = { 11, 23, 12 };
+	Location teatru(noSeatsPerRow, 3, 2, 12);*/
 	//teatru.print();
 
 	//Location copy = teatru;
@@ -27,7 +27,7 @@ int main() {
 	}*/
 
 
-	Event petrecere("Neversea", "Constanta", "22 pm", "22 oct 2022", 3);
+	/*Event petrecere("Neversea", "Constanta", "22 pm", "22 oct 2022", 3);*/
 	//cout << petrecere;
 	//cin >> petrecere;
 	/*Event party = petrecere;
@@ -43,14 +43,23 @@ int main() {
 	else
 		cout << endl << "The same duration";*/
 
-	srand(time(0));
-	Ticket bilet(rand(), "Popescu Ilie", 100, 18, VIP);
-	cout << bilet;
-	cout << endl << "-----------------------";
-	cin >> bilet;
-	cout << endl << "-----------------------";
-	bilet *= 2;
-	cout << bilet;
+	//srand(time(0));
+	//Ticket bilet(rand(), "Popescu Ilie", 100, 18, VIP);
+	//cout << bilet;
+	//cout << endl << "-----------------------";
+	//cin >> bilet;
+	//cout << endl << "-----------------------";
+	//bilet *= 2;
+	//cout << bilet;
 
-	
+	Event Party;
+	//MENU
+	/*do {*/
+		cout << "\n\t\t\t -------------------------------";
+		cout << "\n\t\t\t Ticketing APP Validating System";
+		cout << "\n\t\t\t -------------------------------";
+		cout << "\n\t\t\t\t Welcome!";
+		cout << "\n\n\t\t\t\t Please enter your event!";
+		cin >> Party;
+	/*}*/
 }
