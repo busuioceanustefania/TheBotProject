@@ -14,7 +14,10 @@ private:
 	string fullName = "No Name";
 	int age = 0;
 
+	static int NO_OF_TICKETS;
 public:
+
+	
 
 	//default constructor
 	Ticket() : ticketId(0), fullName("Unknown") {
@@ -27,6 +30,8 @@ public:
 		this->setPrice(price);
 		this->setAge(age);
 		this->setType(type);
+
+		Ticket::NO_OF_TICKETS++;
 	}
 
 	//setters and getters
@@ -70,6 +75,8 @@ public:
 		this->setAge(ticket.age);
 		this->setPrice(ticket.price);
 		this->setType(ticket.type);
+
+		Ticket::NO_OF_TICKETS++;
 	}
 
 	//the equal operator
@@ -81,6 +88,12 @@ public:
 		this->age = ticket.age;
 		this->price = ticket.price;
 		this->type = ticket.type;
+
+		Ticket::NO_OF_TICKETS++;
+	}
+
+	static int getCount() {
+		return NO_OF_TICKETS;
 	}
 
 	double getDiscount() {
@@ -110,7 +123,10 @@ public:
 	}
 };
 
+int Ticket::NO_OF_TICKETS = 0;
+
 void operator<<(ostream& out, Ticket ticket) {
+	out << endl << "ID: " << ticket.ticketId;
 	out << endl << "Full name: " << ticket.fullName;
 	out << endl << "Age: " << ticket.age;
 	out << endl << "Price: " << ticket.price;
@@ -144,4 +160,6 @@ void operator>>(istream& in, Ticket& ticket) {
 				}
 				else
 					ticket.type = OTHER;
+
+	Ticket::NO_OF_TICKETS++;
 }

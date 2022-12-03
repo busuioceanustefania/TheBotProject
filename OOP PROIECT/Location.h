@@ -47,11 +47,11 @@ public:
 			throw "The SeatsPerRow pointer is not ok";
 		}
 
-		/*for (int i = 0; i < noRows; i++) {
+		for (int i = 0; i < noRows; i++) {
 			if (noNewSeatsPerRow[i] < Location::MINIMUM_NO_SEATS_PER_ROW || noNewSeatsPerRow[i]>Location::MAXIMUM_NO_SEATS_PER_ROW) {
 				throw "Number of seats is not ok";
 			}
-		}*/
+		}
 
 		if (this->noSeatsPerRow != nullptr)
 			delete[] this->noSeatsPerRow;
@@ -141,6 +141,17 @@ public:
 		return totalNoSeats;
 	}
 
+	int getTotalNumberofSeats() {
+		int totalNoSeats = 0;
+		for (int i = 0; i < this->noZones; i++) {
+			for (int j = 0; j < this->noRows; j++)
+			{
+				totalNoSeats= totalNoSeats + this->noSeatsPerRow[i];
+			}
+		}
+		return totalNoSeats;
+	}
+
 	friend void operator<<(ostream& out, Location location);
 	friend void operator>>(istream& in, Location& location);
 
@@ -160,7 +171,7 @@ Location operator+(Location location, int value) {
 	//increasing the number of rows
 
 	Location result = location;
-	result.setNoRows(location.getNoRows() + value);
+	result.setNoSeat(location.getNoSeat() + value);
 	return result;
 }
 
@@ -168,7 +179,7 @@ Location operator-(Location location, int value) {
 
 	//decreasing the number of rows
 	Location result = location;
-	result.setNoRows(location.getNoRows() - value);
+	result.setNoSeat(location.getNoSeat() - value);
 	return result;
 }
 

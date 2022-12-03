@@ -4,6 +4,8 @@
 #include "Ticket.h"
 #include <iostream>
 #include <string>
+#include <stdlib.h>
+#include <time.h>
 using namespace std;
 
 int main() {
@@ -41,11 +43,14 @@ int main() {
 	else
 		cout << endl << "The same duration";*/
 
-	Ticket bilet(1, "Popescu Ilie", 100, 18, VIP);
+	srand(time(0));
+	Ticket bilet(rand(), "Popescu Ilie", 100, 18, VIP);
 	cout << bilet;
 	cout << endl << "-----------------------";
 	cin >> bilet;
 	cout << endl << "-----------------------";
 	bilet *= 2;
 	cout << bilet;
+
+	
 }
