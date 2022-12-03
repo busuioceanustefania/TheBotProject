@@ -136,10 +136,18 @@ void operator<<(ostream& out, Ticket ticket) {
 void operator>>(istream& in, Ticket& ticket) {
 	cout << endl << "Full name: ";
 	in >> ticket.fullName;
-	cout << endl << "Age: ";
+
+	cout << endl << "Age: (please enter positive values) ";
 	in >> ticket.age;
-	cout << endl << "Price: ";
+	if (ticket.age < 0) {
+		cout << endl << "Invalid age";
+	}
+
+	cout << endl << "Price: (please enter positive values) ";
 	in >> ticket.price;
+	if (ticket.price < 0) {
+		cout << endl << "Invalid price";
+	}
 	cout << endl << "Please choose the following type of ticket: VIP, LAWN, TRIBUNE, BOXES, OTHER; ";
 	int value;
 	in >> value;
@@ -159,7 +167,11 @@ void operator>>(istream& in, Ticket& ticket) {
 					ticket.type = BOXES;
 				}
 				else
-					ticket.type = OTHER;
+					if (value == OTHER) {
+						ticket.type = OTHER;
+					}
+				else
+		            cout << endl << "Invalid type";
 
 	Ticket::NO_OF_TICKETS++;
 }

@@ -6,7 +6,7 @@ using namespace std;
 
 class Event {
 private:
-	const string eventName;
+	string eventName=" ";
 	char* address = nullptr;
 	string time=" ";
 	string date=" ";
@@ -212,6 +212,8 @@ void operator<<(ostream& out, Event event) {
 }
 
 void operator>>(istream& in, Event& event) {
+	cout << endl << "Event name: ";
+	in >> event.eventName;
 	cout << endl << "Event date: (please enter the date following this concept: MM/DD/YYYY) ";
 	in >> event.date;
 	if (valid_date(event.date) == false)
@@ -222,7 +224,7 @@ void operator>>(istream& in, Event& event) {
 	if (valid_time(event.time) == false)
 		cout << endl << "Invalid time";
 
-	cout << endl << "Event duration: (please enter a value bigger than 0) ";
+	cout << endl << "Event duration(in hours): (please enter a value bigger than 0) ";
 	in >> event.duration;
 	if (event.duration <= 0)
 		cout << endl << "Invalid duration";
