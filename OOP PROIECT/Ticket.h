@@ -37,6 +37,9 @@ public:
 	//setters and getters
 
 	void setFullName(string fullName) {
+		/*if (fullName.length() < 3) {
+			throw "Please enter a valid name (at least 3 characters)";
+		}*/
 		this->fullName = fullName;
 	}
 
@@ -45,6 +48,9 @@ public:
 	}
 
 	void setPrice(int price) {
+		/*if (price < 0) {
+			throw "Invalid price";
+		}*/
 		this->price = price;
 	}
 
@@ -53,6 +59,9 @@ public:
 	}
 
 	void setAge(int age) {
+		/*if (age < 0) {
+			throw "Invalid age";
+		}*/
 		this->age = age;
 	}
 
@@ -134,8 +143,15 @@ void operator<<(ostream& out, Ticket ticket) {
 }
 
 void operator>>(istream& in, Ticket& ticket) {
-	cout << endl << "Full name: ";
+	/*srand(time(0));
+	cout << endl << "Ticket ID: ";
+	ticket.ticketId = rand();*/
+
+	cout << endl << "Full name: (please enter your full name)";
 	in >> ticket.fullName;
+	if (ticket.fullName.length() < 3) {
+		cout << endl << "Please enter a valid name (at least 3 characters)";
+	}
 
 	cout << endl << "Age: (please enter positive values) ";
 	in >> ticket.age;

@@ -53,6 +53,7 @@ int main() {
 	//cout << bilet;
 
 	Event Party;
+	Location Club;
 	//MENU
 	/*do {*/
 		cout << "\n\t\t\t -------------------------------";
@@ -60,6 +61,7 @@ int main() {
 		cout << "\n\t\t\t -------------------------------";
 		cout << "\n\t\t\t\t Welcome!";
 		cout << "\n\n\t\t\t\t Please enter your event!";
-		cin >> Party;
+		/*cin >> Party;*/
+		cin >> Club;
 	/*}*/
 }

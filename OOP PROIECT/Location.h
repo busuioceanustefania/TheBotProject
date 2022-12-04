@@ -19,22 +19,34 @@ public:
 
 	//setters and getters
 	void setNoSeat(int noSeat) {
+		/*if (noSeat <= 0) {
+			throw "Invalid number of seats";
+		}*/
 		this->noSeat = noSeat;
 	}
+
 	int getNoSeat() {
 		return this->noSeat;
 	}
 
 	void setNoRows(int noRows) {
+		/*if (noRows <= 0) {
+			throw "Invalid number of rows";
+		}*/
 		this->noRows = noRows;
 	}
+
 	int getNoRows() {
 		return this->noRows;
 	}
 
 	void setNoZones(int noZones) {
+		/*if (noZones <= 0) {
+			throw "Invalid number of zones";
+		}*/
 		this->noZones = noZones;
 	}
+
 	int getNoZones() {
 		return this->noZones;
 	}
@@ -167,6 +179,15 @@ private:
 
 };
 
+bool validateNoSeatsPerRow(int* noSeatsPerRow, int noRows) {
+	for (int i = 0; i < noRows; i++) {
+		if (noSeatsPerRow[i] < Location::MINIMUM_NO_SEATS_PER_ROW || noSeatsPerRow[i] > Location::MAXIMUM_NO_SEATS_PER_ROW) {
+			return false;
+		}
+	}
+	return true;
+}
+
 Location operator+(Location location, int value) {
 	//increasing the number of rows
 
@@ -194,9 +215,13 @@ void operator<<(ostream& out, Location location) {
 }
 
 void operator>>(istream& in, Location& location) {
-	cout << endl << "Numer of Rows: ";
+	cout << endl << "Numer of Rows: (please enter a positive number) ";
 	in >> location.noRows;
-	cout << endl << "Number of seats per row: ";
+	if (location.noRows <= 0) {
+		cout << endl << "Invalid number of rows";
+	}
+
+	cout << endl << "Number of seats per row: (between 1 and 50): ";
 	if (location.noSeatsPerRow != nullptr) {
 		delete[] location.noSeatsPerRow;
 		location.noSeatsPerRow = nullptr;
@@ -204,9 +229,21 @@ void operator>>(istream& in, Location& location) {
 	location.noSeatsPerRow = new int[location.noRows];
 	for (int i = 0; i < location.noRows; i++) {
 		in >> location.noSeatsPerRow[i];
+		if (location.noSeatsPerRow[i] < Location::MINIMUM_NO_SEATS_PER_ROW || location.noSeatsPerRow[i] > Location::MAXIMUM_NO_SEATS_PER_ROW) {
+			cout << endl << "Invalid number of seats per row";
+		}
 	}
+
+
 	cout << endl << "Number of Zones: ";
 	in >> location.noZones;
-	cout << endl << "Number of seat: ";
+	if (location.noZones <= 0) {
+		cout << endl << "Invalid number of zones";
+	}
+
+	cout << endl << "Number of seats: ";
 	in >> location.noSeat;
+	if (location.noSeat <= 0) {
+		cout << endl << "Invalid number of seats";
+	}
 }

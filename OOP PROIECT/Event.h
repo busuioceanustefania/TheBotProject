@@ -6,10 +6,10 @@ using namespace std;
 
 class Event {
 private:
-	string eventName=" ";
+	string eventName="Event";
 	char* address = nullptr;
-	string time=" ";
-	string date=" ";
+	string time="12:00";
+	string date="11/11/2011";
 	int duration = 0;
 
 	static int NO_OF_EVENTS;
@@ -36,9 +36,9 @@ public:
 
 	//setters and getters
 	void setEventAddress(const char* address) {
-		if (strlen(address) < Event::MIN_ADDRESS_SIZE) {
+		/*if (strlen(address) < Event::MIN_ADDRESS_SIZE) {
 			throw "Invalid address";
-		}
+		}*/
 		if (this->address != nullptr)
 			delete this->address;
 		this->address = new char[strlen(address) + 1];
@@ -52,6 +52,13 @@ public:
 	}
 
 	void setEventTime(string time) {
+		/*regex pattern("([01][0-9]|2[0-3]):[0-5][0-9]");
+		smatch m;
+		regex_search(time, m, pattern);
+		if (m[0].matched == false) {
+			cout<<endl<< "Invalid time";
+		}
+		else*/
 		this->time = time;
 	}
 	
@@ -60,6 +67,13 @@ public:
 	}
 
 	void setEventDate(string date) {
+		/*regex pattern("^(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])/[0-9]{4}$");
+		smatch m;
+		regex_search(date, m, pattern);
+		if (m[0].matched == false) {
+			cout<<endl<< "Invalid date";
+		}
+		else*/
 		this->date = date;
 	}
 
@@ -68,6 +82,9 @@ public:
 	}
 
 	void setEventDuration(int duration) {
+		/*if (duration <= 0) {
+			cout<<endl<< "Invalid duration";
+		}*/
 		this->duration = duration;
 	}
 
@@ -188,15 +205,23 @@ bool valid_date(string date) {
 	else
 		return false;
 }
-
+////https://regex101.com/r/mN1iT5/16
 bool valid_time(string time) {
-	regex pattern("([01]?[0-9]|2[0-3]):[0-5][0-9]");
+	regex pattern("([01][0-9]|2[0-3]):[0-5][0-9]");
 	smatch m;
 	regex_search(time, m, pattern);
 	if (m[0].matched == true)
 		return true;
 	else
 		return false;
+}
+
+bool valid_address(const char* address ) {
+	if (strlen(address) < Event::MIN_ADDRESS_SIZE) {
+		return false;
+	}
+	else
+		return true;
 }
 
 int Event::NO_OF_EVENTS = 0;
@@ -238,5 +263,9 @@ void operator>>(istream& in, Event& event) {
 	}
 	event.address = new char[strlen(buffer) + 1];
 	strcpy(event.address, buffer);
+	if (valid_address(event.address) == false) {
+		cout << endl << "Invalid address";
+	}
+	Event::NO_OF_EVENTS++;
 
 }
