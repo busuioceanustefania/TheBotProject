@@ -62,6 +62,8 @@ int main() {
 		cout << "\n\t\t\t\t Welcome!";
 		cout << "\n\n\t\t\t\t Please enter your event!";
 		/*cin >> Party;*/
-		cin >> Club;
+		/*cin >> Club;*/
 	/*}*/
+		Ticket bilet;
+		cin >> bilet;
 }

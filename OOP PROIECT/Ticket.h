@@ -134,6 +134,7 @@ public:
 
 int Ticket::NO_OF_TICKETS = 0;
 
+
 void operator<<(ostream& out, Ticket ticket) {
 	out << endl << "ID: " << ticket.ticketId;
 	out << endl << "Full name: " << ticket.fullName;
@@ -142,10 +143,12 @@ void operator<<(ostream& out, Ticket ticket) {
 	out << endl << "Ticket type: " << ticket.type;
 }
 
+
 void operator>>(istream& in, Ticket& ticket) {
-	/*srand(time(0));
+	srand(time(0));
 	cout << endl << "Ticket ID: ";
-	ticket.ticketId = rand();*/
+	int id = rand();
+	cout << id;
 
 	cout << endl << "Full name: (please enter your full name)";
 	in >> ticket.fullName;
@@ -165,25 +168,26 @@ void operator>>(istream& in, Ticket& ticket) {
 		cout << endl << "Invalid price";
 	}
 	cout << endl << "Please choose the following type of ticket: VIP, LAWN, TRIBUNE, BOXES, OTHER; ";
-	int value;
+	string value;
 	in >> value;
-	if (value == VIP) {
+	transform(value.begin(), value.end(), value.begin(), ::toupper);
+	if (value == "VIP") {
 		ticket.type = VIP;
 	}
 	else
-		if (value == LAWN) {
+		if (value == "LAWN") {
 			ticket.type = LAWN;
 		}
 		else
-			if (value == TRIBUNE) {
+			if (value == "TRIBUNE") {
 				ticket.type = TRIBUNE;
 			}
 			else
-				if (value == BOXES) {
+				if (value == "BOXES") {
 					ticket.type = BOXES;
 				}
 				else
-					if (value == OTHER) {
+					if (value == "OTHER") {
 						ticket.type = OTHER;
 					}
 				else
