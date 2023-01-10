@@ -164,6 +164,8 @@ public:
 		return totalNoSeats;
 	}
 
+	
+
 	friend void operator<<(ostream& out, Location location);
 	friend void operator>>(istream& in, Location& location);
 

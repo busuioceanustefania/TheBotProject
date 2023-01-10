@@ -54,8 +54,9 @@ int main() {
 
 	Event Party;
 	Location Club;
-	//MENU
-	/*do {*/
+	Ticket bilet;
+	/*MENU
+	do {*/
 		cout << "\n\t\t\t -------------------------------";
 		cout << "\n\t\t\t Ticketing APP Validating System";
 		cout << "\n\t\t\t -------------------------------";
@@ -63,6 +64,9 @@ int main() {
 		cout << "\n\n\t\t\t\t Please enter your event!";
 		cin >> Party;
 		cin >> Club;
-		Ticket bilet;
 		cin >> bilet;
+
+	//FreeTickets ticket1(1, 1, "Stefania", 123, 20, VIP);
+	//ticket1.print();
+	//ticket1.paidForTickets();
 }
