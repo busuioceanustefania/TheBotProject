@@ -27,7 +27,10 @@ int main() {
 	}*/
 
 
-	/*Event petrecere("Neversea", "Constanta", "22 pm", "22 oct 2022", 3);*/
+	/*eventAds petrecere(2,"Neversea", "Constanta", "22 pm", "22 oct 2022", 3);
+	petrecere.print();
+	petrecere.adsPerEvent();*/
+
 	//cout << petrecere;
 	//cin >> petrecere;
 	/*Event party = petrecere;
@@ -52,21 +55,29 @@ int main() {
 	//bilet *= 2;
 	//cout << bilet;
 
-	Event Party;
-	Location Club;
-	Ticket bilet;
-	/*MENU
-	do {*/
-		cout << "\n\t\t\t -------------------------------";
-		cout << "\n\t\t\t Ticketing APP Validating System";
-		cout << "\n\t\t\t -------------------------------";
-		cout << "\n\t\t\t\t Welcome!";
-		cout << "\n\n\t\t\t\t Please enter your event!";
-		cin >> Party;
-		cin >> Club;
-		cin >> bilet;
+	//Event Party;
+	//Location Club;
+	//Ticket bilet;
+	///*MENU
+	//do {*/
+	//	cout << "\n\t\t\t -------------------------------";
+	//	cout << "\n\t\t\t Ticketing APP Validating System";
+	//	cout << "\n\t\t\t -------------------------------";
+	//	cout << "\n\t\t\t\t Welcome!";
+	//	cout << "\n\n\t\t\t\t Please enter your event!";
+	//	cin >> Party;
+	//	cin >> Club;
+	//	cin >> bilet;
 
 	//FreeTickets ticket1(1, 1, "Stefania", 123, 20, VIP);
 	//ticket1.print();
 	//ticket1.paidForTickets();
+
+
+	int noSeatsPerRow[] = { 11, 23, 12 };
+	Gates teatru(4,noSeatsPerRow, 3, 2, 12);
+	teatru.print();
+	teatru.totalNumberOfSeats();
+
+
 }

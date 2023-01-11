@@ -12,6 +12,7 @@ private:
 	string date="11/11/2011";
 	int duration = 0;
 
+protected:
 	static int NO_OF_EVENTS;
 public:
 
@@ -162,7 +163,7 @@ public:
 		}
 	}
 
-	static int getCount() {
+	 static int getCount() {
 		return NO_OF_EVENTS;
 	}
 
@@ -194,7 +195,38 @@ public:
 		return newtext;
 	}
 
-	
+	virtual void print() {
+		cout << endl << "Event name: " << this->eventName;
+		if (this->address != nullptr) {
+			cout << endl << "Event address: " << this->address;
+		}
+		cout << endl << "Event time: " << this->time;
+		cout << endl << "Event date: " << this->date;
+		cout << endl << "Event duration: " << this->duration;
+	}
+
+	virtual void adsPerEvent() {
+		cout << endl << "Expected events: " << Event::NO_OF_EVENTS;
+	}
+};
+
+class eventAds : public Event {
+	int noAds = 0;
+public:
+	eventAds(int noAds, string eventName, const char* eventAddress, string eventTime, string eventDate, int eventDuration)  
+		: Event(eventName, eventAddress, eventTime, eventDate, eventDuration), noAds(noAds) {
+
+	}
+
+	void print() {
+		this->Event::print();
+		cout << endl << "Number of ads: " << this->noAds;
+	}
+
+	void adsPerEvent() {
+		this->Event::adsPerEvent();
+		cout << endl << "Number of total ads: " << this->noAds * Event::NO_OF_EVENTS;
+	}
 };
 bool valid_date(string date) {
 	regex pattern("^(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])/[0-9]{4}$");
@@ -239,20 +271,31 @@ void operator<<(ostream& out, Event event) {
 void operator>>(istream& in, Event& event) {
 	cout << endl << "Event name: ";
 	in >> event.eventName;
+
 	cout << endl << "Event date: (please enter the date following this concept: MM/DD/YYYY) ";
 	in >> event.date;
-	if (valid_date(event.date) == false)
+	while (valid_date(event.date) == false) {
 		cout << endl << "Invalid date";
+		cout << endl << "Please enter the date again: ";
+		in >> event.date;
+	}
 
 	cout << endl << "Event time: (please enter the time following this concept: HH:MM) ";
 	in >> event.time;
-	if (valid_time(event.time) == false)
+	while (valid_time(event.time) == false) {
 		cout << endl << "Invalid time";
+		cout << endl << "Please enter the time again: ";
+		in >> event.time;
+	}
 
 	cout << endl << "Event duration(in hours): (please enter a value bigger than 0) ";
 	in >> event.duration;
-	if (event.duration <= 0)
+	while (event.duration <= 0) {
 		cout << endl << "Invalid duration";
+		cout << endl << "Please enter the duration again: ";
+		in >> event.duration;
+	}
+
 
 	cout << endl << "Event address: ";
 	char buffer[100];
@@ -263,8 +306,16 @@ void operator>>(istream& in, Event& event) {
 	}
 	event.address = new char[strlen(buffer) + 1];
 	strcpy(event.address, buffer);
-	if (valid_address(event.address) == false) {
+	while (valid_address(event.address) == false) {
 		cout << endl << "Invalid address";
+		cout << endl << "Please enter your address again: ";
+		in >> buffer;
+		if (event.address != nullptr) {
+			delete[] event.address;
+			event.address = nullptr;
+		}
+		event.address = new char[strlen(buffer) + 1];
+		strcpy(event.address, buffer);
 	}
 	Event::NO_OF_EVENTS++;
 

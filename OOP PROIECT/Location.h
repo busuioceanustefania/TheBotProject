@@ -109,7 +109,7 @@ public:
 	}
 
 	//generic method print
-	void print() {
+	virtual void print() {
 		cout << endl << "The number of seats per row: ";
 		for (int i = 0; i < this->noRows; i++)
 			cout << this->noSeatsPerRow[i] << " ";
@@ -164,7 +164,16 @@ public:
 		return totalNoSeats;
 	}
 
-	
+	void totalNumberOfSeats() {
+		int totalNoSeats = 0;
+		for (int i = 0; i < this->noZones; i++) {
+			for (int j = 0; j < this->noRows; j++)
+			{
+				totalNoSeats = totalNoSeats + this->noSeatsPerRow[i];
+			}
+		}
+		cout << endl << "Total number of seats: " << totalNoSeats;
+	}
 
 	friend void operator<<(ostream& out, Location location);
 	friend void operator>>(istream& in, Location& location);
@@ -178,6 +187,25 @@ private:
 		return copy;
 	}
 
+
+};
+
+class Gates : public Location {
+	int noGates = 0;
+public:
+	Gates(int noGates, int* noSeatsPerRow, int noRows, int noZones, int noSeat) : Location(noSeatsPerRow, noRows, noZones, noSeat), noGates(noGates) {
+
+	}
+
+	void print() {
+		this->Location::print();
+		cout << endl << "Number of gates: " << this->noGates;
+	}
+
+	void totalNumberOfSeats() {
+		this->Location::totalNumberOfSeats();
+		cout << endl << "Total number of seats per gate: " <<  Location::getTotalNumberofSeats()/ this->noGates;
+	}
 
 };
 
@@ -219,8 +247,9 @@ void operator<<(ostream& out, Location location) {
 void operator>>(istream& in, Location& location) {
 	cout << endl << "Numer of Rows: (please enter a positive number) ";
 	in >> location.noRows;
-	if (location.noRows <= 0) {
-		cout << endl << "Invalid number of rows";
+	while (location.noRows <= 0) {
+		cout << endl << "Invalid number of rows, please try again: ";
+		in >> location.noRows;
 	}
 
 	cout << endl << "Number of seats per row: (between 1 and 50): ";
@@ -231,21 +260,28 @@ void operator>>(istream& in, Location& location) {
 	location.noSeatsPerRow = new int[location.noRows];
 	for (int i = 0; i < location.noRows; i++) {
 		in >> location.noSeatsPerRow[i];
-		if (location.noSeatsPerRow[i] < Location::MINIMUM_NO_SEATS_PER_ROW || location.noSeatsPerRow[i] > Location::MAXIMUM_NO_SEATS_PER_ROW) {
-			cout << endl << "Invalid number of seats per row";
+		while (location.noSeatsPerRow[i] < Location::MINIMUM_NO_SEATS_PER_ROW || location.noSeatsPerRow[i] > Location::MAXIMUM_NO_SEATS_PER_ROW) {
+			cout << endl << "Invalid number of seats per row, please try again: ";
+			if (location.noSeatsPerRow != nullptr) {
+				delete[] location.noSeatsPerRow;
+				location.noSeatsPerRow = nullptr;
+			}
+			location.noSeatsPerRow = new int[location.noRows];
 		}
 	}
 
 
 	cout << endl << "Number of Zones: ";
 	in >> location.noZones;
-	if (location.noZones <= 0) {
-		cout << endl << "Invalid number of zones";
+	while (location.noZones <= 0) {
+		cout << endl << "Invalid number of zones, please try again: ";
+		in >> location.noZones;
 	}
 
 	cout << endl << "Number of seats: ";
 	in >> location.noSeat;
-	if (location.noSeat <= 0) {
-		cout << endl << "Invalid number of seats";
+	while (location.noSeat <= 0) {
+		cout << endl << "Invalid number of seats, please try again: ";
+		in >> location.noSeat;
 	}
 }

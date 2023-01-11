@@ -8,8 +8,8 @@ enum TicketType { VIP, LAWN, TRIBUNE, BOXES, OTHER};
 
 class Ticket {
 
-protected:
-	
+private:
+
 	Location location;
 	const int ticketId;
 	TicketType type = OTHER;
@@ -17,10 +17,10 @@ protected:
 	string fullName = "No Name";
 	int age = 0;
 
-	static int NO_OF_TICKETS;
+
 public:
 
-	
+	static int NO_OF_TICKETS;
 
 	//default constructor
 	Ticket() : ticketId(0), fullName("Unknown") {
@@ -110,7 +110,7 @@ public:
 
 	double getDiscount() {
 		double newPrice = 0;
-		newPrice =this->price-( 0.20 * this->price);
+		newPrice = this->price - (0.20 * this->price);
 		return newPrice;
 	}
 
