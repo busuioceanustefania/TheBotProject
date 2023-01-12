@@ -8,7 +8,7 @@ enum TicketType { VIP, LAWN, TRIBUNE, BOXES, OTHER};
 
 class Ticket {
 
-private:
+protected:
 
 	Location location;
 	const int ticketId;

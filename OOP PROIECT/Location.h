@@ -5,7 +5,7 @@ using namespace std;
 
 class Location {
 
-private:
+protected:
 
 	int noSeat = 0;   //the seat number
 	int noRows = 0;   //the number of rows

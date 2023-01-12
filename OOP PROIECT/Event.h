@@ -4,19 +4,67 @@
 #include <regex>
 using namespace std;
 
-class Event {
-private:
+//abstract class
+class EventInformation {
+
+protected:
+	string information = "";
+	string company = "";
+
+public:
+
+	EventInformation() {
+		cout << endl << "The default constructor for event information";
+	}
+
+	EventInformation(string information, string company) : information(information),
+		company(company) {
+
+	}
+
+	string getInformation() {
+		return this->information;
+	}
+
+	void setInformation(string newInformation) {
+		this->information = newInformation;
+	}
+
+	virtual void printInfo() = 0;
+};
+
+
+
+class Event : public EventInformation {
+
+protected:
 	string eventName="Event";
 	char* address = nullptr;
 	string time="12:00";
 	string date="11/11/2011";
 	int duration = 0;
 
-protected:
+
 	static int NO_OF_EVENTS;
 public:
 
 	const static int MIN_ADDRESS_SIZE = 3;
+
+
+	//constructor from the abstract class
+	Event(string information, string company, string eventName, const char* eventAddress,
+		string eventTime, string eventDate, int eventDuration) : EventInformation(information, company),
+		eventName(eventName), date(eventDate), time(eventTime), duration(eventDuration)
+	{
+		this->setEventAddress(eventAddress);
+	}
+
+	//pure virtual method
+	void printInfo() {
+		cout << endl << "The event information is: " << this->information;
+		cout << endl << "The event company is: " << this->company;
+	}
+
 	 
 	//default ctor
 	Event() : eventName("Event") {

@@ -74,10 +74,12 @@ int main() {
 	//ticket1.paidForTickets();
 
 
-	int noSeatsPerRow[] = { 11, 23, 12 };
+	/*int noSeatsPerRow[] = { 11, 23, 12 };
 	Gates teatru(4,noSeatsPerRow, 3, 2, 12);
 	teatru.print();
-	teatru.totalNumberOfSeats();
+	teatru.totalNumberOfSeats();*/
 
+	Event event1("evenimentul anului", "apple", "serbare","bucuresti", "17", "12/12/2022", 2);
+	event1.printInfo();
 
 }
