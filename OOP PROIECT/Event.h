@@ -2,6 +2,7 @@
 #include <iostream>
 #include <string>
 #include <regex>
+#include <fstream>
 using namespace std;
 
 //abstract class
@@ -243,6 +244,8 @@ public:
 		return newtext;
 	}
 
+	
+
 	virtual void print() {
 		cout << endl << "Event name: " << this->eventName;
 		if (this->address != nullptr) {
@@ -256,6 +259,8 @@ public:
 	virtual void adsPerEvent() {
 		cout << endl << "Expected events: " << Event::NO_OF_EVENTS;
 	}
+
+	
 };
 
 class eventAds : public Event {

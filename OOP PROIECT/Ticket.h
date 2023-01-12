@@ -80,6 +80,10 @@ public:
 		return this->type;
 	}
 
+	int getId() {
+		return this->ticketId;
+	}
+
 	//the copy constructor
 	Ticket(const Ticket& ticket) :ticketId(ticket.ticketId) {
 		cout << endl << "The copy constructor";
@@ -162,6 +166,22 @@ public:
 		}
 		else
 			return false;
+	}
+
+	//binary files to save issued tickets
+	static void generateTickets(Ticket** ticket, int noTickets, string fileName) {
+
+		fstream file(fileName, ios::out | ios::app | ios::binary);
+		if (file.is_open()) {
+			file << endl << "--- The Ticket generator ---";
+			for (int i = 0; i < noTickets; i++) {
+				file << endl << ticket[i]->getId();
+			}
+			file.close();
+		}
+		else {
+			cout << endl << "--- Error opening the file ---";
+		}
 	}
 };
 

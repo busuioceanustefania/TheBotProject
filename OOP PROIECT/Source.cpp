@@ -79,7 +79,14 @@ int main() {
 	teatru.print();
 	teatru.totalNumberOfSeats();*/
 
-	Event event1("evenimentul anului", "apple", "serbare","bucuresti", "17", "12/12/2022", 2);
-	event1.printInfo();
+	//Event event1("evenimentul anului", "apple", "serbare","bucuresti", "17", "12/12/2022", 2);
+	//event1.printInfo();
+
+	Ticket* tickets[3];
+	tickets[0] = new Ticket(1, "Stefania", 100, 20, VIP);
+	tickets[1] = new Ticket(2, "Mihai", 100, 21, VIP);
+	tickets[2] = new Ticket(3, "Andrei", 100, 19, VIP);
+
+	Ticket::generateTickets(tickets, 3, "generateTickets.txt");
 
 }
