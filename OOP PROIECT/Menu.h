@@ -6,7 +6,7 @@ using namespace std;
 class MainMenu {
 
 protected:
-	int availableTickets = 0;
+	int availableTickets = 100;
 	double ticketPrice = 0;
 
 public:

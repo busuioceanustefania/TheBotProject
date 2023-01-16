@@ -7,6 +7,7 @@
 #include <string>
 #include <stdlib.h>
 #include <time.h>
+#include <fstream>
 using namespace std;
 
 void MainMenu::Run() {
@@ -47,6 +48,7 @@ void MainMenu::Run() {
 			cin.ignore();
 		}
 	} while (option != 4);
+	
 }
 
 void MainMenu::DisplayMenu() {
@@ -58,173 +60,203 @@ void MainMenu::DisplayMenu() {
 	cout << endl << "\t\t\t\t2--> Add the location of the event";
 	cout << endl << "\t\t\t\t3--> Add the tickets of the event";
 	cout << endl << "\t\t\t\t4--> QUIT";
+	
 }
 
-//bool valid_date(string date) {
-//	regex pattern("^(1[0-2]|0[1-9])/(3[01]|[12][0-9]|0[1-9])/[0-9]{4}$");
-//	smatch m;
-//	regex_search(date, m, pattern);
-//	if (m[0].matched == true)
-//		return true;
-//	else
-//		return false;
-//}
-//////https://regex101.com/r/mN1iT5/16
-//bool valid_time(string time) {
-//	regex pattern("([01][0-9]|2[0-3]):[0-5][0-9]");
-//	smatch m;
-//	regex_search(time, m, pattern);
-//	if (m[0].matched == true)
-//		return true;
-//	else
-//		return false;
-//}
 
 void MainMenu::AddEvent() {
 	system("CLS");
-	int eventName;
-	cout << endl << "Event name: ";
-	cin >> eventName;
+	ofstream file("Event.txt", ios::out | ios::app); {
 
-	cout << endl << "Event date: (please enter the date following this concept: MM/DD/YYYY) ";
-	string date;
-	cin >> date;
-
-	while (valid_date(date) == false) {
-		cout << endl << "Invalid date";
-		cout << endl << "Please enter the date again: ";
-		cin >> date;
+		string eventName;
+		string name;
+		cout << endl << "Enter your event name ";
+		cin >> eventName;
+		name = eventName;
+		file << name;
 		
-	}
 
-	cout << endl << "Event time: (please enter the time following this concept: HH:MM) ";
-	string time;
-	cin >> time;
-	while (valid_time(time) == false) {
-		cout << endl << "Invalid time";
-		cout << endl << "Please enter the time again: ";
+		cout << endl << "Event date: (please enter the date following this concept: MM/DD/YYYY) ";
+		string date1;
+		string date;
+		cin >> date1;
+		date = date1;
+
+		while (valid_date(date) == false) {
+			cout << endl << "Invalid date";
+			cout << endl << "Please enter the date again: ";
+			cin >> date1;
+			date = date1;
+
+		}
+		file << endl << date;
+
+		cout << endl << "Event time: (please enter the time following this concept: HH:MM) ";
+		string time, time1;
 		cin >> time;
-	}
+		time1 = time;
+		while (valid_time(time) == false) {
+			cout << endl << "Invalid time";
+			cout << endl << "Please enter the time again: ";
+			cin >> time;
+			time1 = time;
+		}
+		file << endl << time1;
 
-	cout << endl << "Event duration(in hours): (please enter a value bigger than 0) ";
-	int duration;
-	cin >> duration;
-	while (duration <= 0) {
-		cout << endl << "Invalid duration";
-		cout << endl << "Please enter the duration again: ";
+
+		cout << endl << "Event duration(in hours): (please enter a value bigger than 0) ";
+		int duration, duration1;
 		cin >> duration;
+		duration1 = duration;
+		while (duration <= 0) {
+			cout << endl << "Invalid duration";
+			cout << endl << "Please enter the duration again: ";
+			cin >> duration;
+			duration1 = duration;
+		}
+		file << endl << duration1;
+
+		cout << endl << "Event address: ";
+		char address[100], address1[100];
+		cin >> address;
+		strcpy(address1, address);
+		while (valid_address(address) == false) {
+			cout << endl << "Invalid address";
+			cout << endl << "Please enter your address again: ";
+			cin >> address;
+			strcpy(address1, address);
+		}
+		file << endl << address1;
 	}
-
-
-	cout << endl << "Event address: ";
-	char address[100];
-	cin >> address;
-	
-	while (valid_address(address) == false) {
-		cout << endl << "Invalid address";
-		cout << endl << "Please enter your address again: ";
-		cin >> address;	
-	}
-
+	file.close();
 	system("PAUSE");
 	system("CLS");
 }
 
 void MainMenu::AddLocation() {
 	system("CLS");
-	cout << endl << "Numer of Rows: (please enter a positive number) ";
-	int noRows;
-	cin >> noRows;
-	while (noRows <= 0 && noRows>=100) {
-		cout << endl << "Invalid number of rows, please try again: ";
-		cin >> noRows;
-	}
+	ofstream file("Event.txt", ios::out|ios::app); {
 
-	cout << endl << "Number of seats per row: (between 1 and 50): ";
-	
-	int noSeatsPerRow[100];
-	for (int i = 0; i < noRows; i++) {
-		cout << endl << "[" << i+1 << "] --> ";
-		cin >> noSeatsPerRow[i];
-		while (noSeatsPerRow[i] < Location::MINIMUM_NO_SEATS_PER_ROW || noSeatsPerRow[i] > Location::MAXIMUM_NO_SEATS_PER_ROW) {
-			cout << endl << "Invalid number of seats per row, please try again: ";
+		cout << endl << "Numer of Rows: (please enter a positive number) ";
+		int noRows, noRows1;
+		cin >> noRows;
+		noRows1 = noRows;
+		while (noRows <= 0 && noRows >= 100) {
+			cout << endl << "Invalid number of rows, please try again: ";
+			cin >> noRows;
+			noRows1 = noRows;
+		}
+		file << endl << noRows1;
+
+		cout << endl << "Number of seats per row: (between 1 and 50): ";
+		int noSeatsPerRow[100], noSeatsPerRow1[100];
+		for (int i = 0; i < noRows; i++) {
 			cout << endl << "[" << i + 1 << "] --> ";
 			cin >> noSeatsPerRow[i];
+			noSeatsPerRow1[i] = noSeatsPerRow[i];
+			while (noSeatsPerRow[i] < Location::MINIMUM_NO_SEATS_PER_ROW || noSeatsPerRow[i] > Location::MAXIMUM_NO_SEATS_PER_ROW) {
+				cout << endl << "Invalid number of seats per row, please try again: ";
+				cout << endl << "[" << i + 1 << "] --> ";
+				cin >> noSeatsPerRow[i];
+				noSeatsPerRow1[i] = noSeatsPerRow[i];
+			}
+			file << endl << noSeatsPerRow1[i];
 		}
-	}
 
 
-	cout << endl << "Number of Zones: ";
-	int noZones;
-	cin >> noZones;
-	while (noZones <= 0) {
-		cout << endl << "Invalid number of zones, please try again: ";
+		cout << endl << "Number of Zones: ";
+		int noZones, noZones1;
 		cin >> noZones;
-	}
+		noZones1 = noZones;
+		while (noZones <= 0) {
+			cout << endl << "Invalid number of zones, please try again: ";
+			cin >> noZones;
+			noZones1 = noZones;
+		}
+		file << endl << noZones1;
 
-	cout << endl << "The seat number: ";
-	int noSeat;
-	cin >> noSeat;
-	while (noSeat <= 0) {
-		cout << endl << "Invalid seat number, please try again: ";
+		cout << endl << "The seat number: ";
+		int noSeat, noSeat1;
 		cin >> noSeat;
+		noSeat1 = noSeat;
+		while (noSeat <= 0) {
+			cout << endl << "Invalid seat number, please try again: ";
+			cin >> noSeat;
+			noSeat1 = noSeat;
+		}
+		file << endl << noSeat1;
 	}
-
+	file.close();
 	system("PAUSE");
 	system("CLS");
 }
 
 void MainMenu::AddTicket() {
 	system("CLS");
-	int noTickets = 1;
+	ofstream file("Ticket.txt", ios::out | ios::app | ios::binary); {
+		int noTickets = 1;
 
-	cout << endl << "Full name: (please enter your full name) ";
-	string fullName;
-	cin >> fullName;
-	while (validateFullName(fullName) == false) {
-		cout << endl << "Invalid name, please enter your name again ";
+		cout << endl << "Full name: (please enter your full name) ";
+		string fullName, fullName1;
 		cin >> fullName;
+		fullName1 = fullName;
+		while (validateFullName(fullName) == false) {
+			cout << endl << "Invalid name, please enter your name again ";
+			cin >> fullName;
+			fullName1 = fullName;
+		}
+		file << fullName1;
 
-	}
-
-
-	cout << endl << "Age: (please enter positive values) ";
-	int age;
-	cin >> age;
-	while (validateAge(age) == false) {
-		cout << endl << "Invalid age, please enter your age again ";
+		cout << endl << "Age: (please enter positive values) ";
+		int age, age1;
 		cin >> age;
-	}
+		age1 = age;
+		while (validateAge(age) == false) {
+			cout << endl << "Invalid age, please enter your age again ";
+			cin >> age;
+			age1 = age;
+		}
+		file << endl << age1;
 
-	cout << endl << "Price: (please enter positive values) ";
-	int price;
-	cin >> price;
-	while (validatePrice(price) == false) {
-		cout << endl << "Invalid price, please enter your price again ";
+		cout << endl << "Price: (please enter positive values) ";
+		int price, price1;
 		cin >> price;
-	}
+		price1 = price;
+		while (validatePrice(price) == false) {
+			cout << endl << "Invalid price, please enter your price again ";
+			cin >> price;
+			price1 = price;
+		}
+		file << endl << price1;
 
-	cout << endl << "Please choose the following type of ticket: VIP, LAWN, TRIBUNE, BOXES, OTHER; ";
-	string value;
-	cin >> value;
-	transform(value.begin(), value.end(), value.begin(), ::toupper);
-	while (validateType(value) == false) {
-		cout << endl << "Invalid ticket type";
-		cout << endl << "Please choose the following type of ticket : VIP, LAWN, TRIBUNE, BOXES, OTHER; ";
+		cout << endl << "Please choose the following type of ticket: VIP, LAWN, TRIBUNE, BOXES, OTHER; ";
+		string value, value1;
 		cin >> value;
 		transform(value.begin(), value.end(), value.begin(), ::toupper);
-	}
-	
-	if (availableTicketsForSale(noTickets) == true) {
+		value1 = value;
+		while (validateType(value) == false) {
+			cout << endl << "Invalid ticket type";
+			cout << endl << "Please choose the following type of ticket : VIP, LAWN, TRIBUNE, BOXES, OTHER; ";
+			cin >> value;
+			transform(value.begin(), value.end(), value.begin(), ::toupper);
+			value1 = value;
+		}
+		file << endl << value1;
 
-		srand(time(0));
-		cout << endl << "Ticket ID: ";
-		int id = rand();
-		cout << id << endl;
+		if (availableTicketsForSale(noTickets) == true) {
+
+			srand(time(0));
+			cout << endl << "Ticket ID: ";
+			int id = rand();
+			int id1;
+			id1 = id;
+			cout << id << endl;
+			file << endl << id1;
+		}
+		else
+			cout << endl << "No available tickets, please try again later..";
 	}
-	else
-		cout << endl << "No available tickets, please try again later..";
-	
+	file.close();
 
 	system("PAUSE");
 	system("CLS");
