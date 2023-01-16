@@ -34,7 +34,7 @@ public:
 		return this->ticketPrice;
 	}
 
-	void Run();
+	void Run(int argc, char** argv);
 	void DisplayMenu();
 	void AddEvent();
 	void AddLocation();

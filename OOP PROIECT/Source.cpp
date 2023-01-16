@@ -10,8 +10,7 @@
 #include <fstream>
 using namespace std;
 
-void MainMenu::Run() {
-
+void MainMenu::Run(int argc, char** argv) {
 	int option;
 
 	do {
@@ -205,7 +204,7 @@ void MainMenu::AddTicket() {
 			cin >> fullName;
 			fullName1 = fullName;
 		}
-		file << fullName1;
+		file <<endl<< fullName1;
 
 		cout << endl << "Age: (please enter positive values) ";
 		int age, age1;
@@ -263,10 +262,10 @@ void MainMenu::AddTicket() {
 }
 
 
-int main() {
+int main(int argc, char** argv) {
 
 	MainMenu menu(12, 100);
-	menu.Run();
+	menu.Run(argc, argv);
 
 	/*int noSeatsPerRow[] = { 11, 23, 12 };
 	Location teatru(noSeatsPerRow, 3, 2, 12);*/
